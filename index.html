@@ -3,144 +3,97 @@
 import { MODULE } from "./OUR.js";
 import { TMP360 } from "./360.js";
 
-// 1 · Pipeline 4 → 9 (W → E)
-export function pipeline49() {
-    return {
-        seq: [4,5,6,7,8,9],
-        axis: "W → E",
-        color: ["gelb","gelb","gelb","rot","rot","rot"],
-        meaning: ["W1","W2","W3","E1","E2","E3"]
-    };
-}
-
-// 2 · Pipi-Bildung 0 → 1 → 2 (a/b/c)
-export function pipi012() {
-    return {
-        seq: [0,1,2],
-        bildung: {
-            0: "a = Fläche = Ursache",
-            1: "b = Körper = Wirkung",
-            2: "c = Continuum = Ergebnis"
-        },
-        color: ["grün","gelb","rot"]
-    };
-}
-
-// 3 · VTALITY-Lauf (TMP + Prefetch)
-export function vitalityRun(operator, ebene) {
-    const base = MODULE.full(operator, ebene);
-
-    return {
-        operator,
-        ebene,
-        tmp: base.zug,
-        addr: base.addr,
-        rot: {
-            r360: base.rot360,
-            r8x: base.rot8x,
-            r12x: base.rot12x
-        },
-        prefetch: base.prefetch,
-        bildung: base.bildung,
-        matrix: base.matrix,
-        icome: base.icome
-    };
-}
-
-// 4 · Schlüssel-Ereignis
-export function keyEvent(event) {
-    return {
-        event,
-        tmp: `tmp(zu(tmp(${event})))`,
-        status: "real VTALITY event"
-    };
-}
-
-// 5 · Load + Run
-export function loadGame() {
-    return {
-        pipeline: pipeline49(),
-        bildung: pipi012(),
-        start: vitalityRun("slide", "Ursache"),
-        home: vitalityRun("wette", "Wirkung"),
-        ort: vitalityRun("score", "Ergebnis"),
-        event: keyEvent("start")
-    };
-}
-<h2>6 · iki1uc · Realstruktur</h2>
+ 6D · iki1uc · Darbietung
 <pre>
-1D: Rotation        = 360.js
-2D: Matrix          = 3mal3.js
-3D: Ursache         = KIpi.U
-4D: Wirkung         = KIpi.W
-5D: Ergebnis        = KIpi.E / MAIN
-6D: Summation       = OUR.js / ICOME
+3D · Geo
+X = a (grün)
+Y = b (gelb)
+Z = c (rot)
 
-Pipeline 4→9:
+4D · Wirkung (SLIDE)
+slide = 1 → 4 → 7
+W1 → W2 → W3
+gelb → gelb → gelb
+Bewegung: PUSH, PULL, SHIFT, FLOW
+
+5D · Ergebnis (WETTE)
+wette = 2 → 5 → 8
+E1 → E2 → E3
+rot → rot → rot
+Bewegung: BREAK, SPIN, RISE, DROP, ROOT
+
+6D · Summation
+Σ(a + b + c)
+ID = Σ◉◎▣
+Continuum = c = a × b × t
+
+Pipeline 4→9
 W1 → W2 → W3 → E1 → E2 → E3
 
-Pipi 0→2:
+Pipi 0→2
 a → b → c
 grün → gelb → rot
 
-VTALITY:
+VTALITY
 TMP(main) + TMP(home) + TMP(ort)
 
-Schlüssel-Ereignis:
+Schlüssel-Ereignis
 tmp(zu(tmp(erreignis)))
 
-Continuum:
-Sonne = c (rot)
-Planeten = a + b
-c = a × b × t
-ICOME = Σ(a + b + c)
+Unsichtbarkeit
+sichtbar = tragbar
+unsichtbar = überlast
+harmonie = farbwechsel(grün → gelb → rot)
 
-ID:
-Σ◉◎▣
-
-2u:
-STATE = stabil
-READY = 100%
-ROLE  = ANKER
-LINK  = lokal
+100 + 360
+100 = Basiswert
+360 = Rotation
+Darstellung = 100 × 360 × Farbe
 </pre>
 
+ 6D · Encoder / Decoder
+<pre>
+ENCODER (3D → 6D)
+input: [a,b,c]
+tmp: [1..9]
+ki: U → W → E
+output: Σ(a+b+c)
+
+DECODER (6D → 3D)
+input: Σ
+split: [U,W,E]
+map: [a,b,c]
+output: Geo-3D
+</pre>
+
+ 6D · CANVAS‑ARCHITEKTUR
+<pre>
 CANVAS.3D = {
-    axis: { X:a(grün), Y:b(gelb), Z:c(rot) },
-    matrix: 3mal3,
-    rotation: 360.js
+axis: { X:a(grün), Y:b(gelb), Z:c(rot) },
+matrix: 3mal3,
+rotation: 360.js
 }
 
 CANVAS.4D = {
-    wirkung: [W1, W2, W3],
-    bewegung: [PUSH, PULL, SHIFT, FLOW],
-    farbe: gelb
+wirkung: [W1, W2, W3],
+bewegung: [PUSH, PULL, SHIFT, FLOW],
+farbe: gelb
 }
 
 CANVAS.5D = {
-    ergebnis: [E1, E2, E3],
-    bewegung: [BREAK, SPIN, RISE, DROP, ROOT],
-    farbe: rot
+ergebnis: [E1, E2, E3],
+bewegung: [BREAK, SPIN, RISE, DROP, ROOT],
+farbe: rot
 }
 
 CANVAS.6D = {
-    summation: Σ(a+b+c),
-    id: Σ◉◎▣,
-    icome: ICOME
+summation: Σ(a+b+c),
+id: Σ◉◎▣,
+icome: ICOME
 }
-ENCODER = {
-    input: [a,b,c],
-    tmp: [1..9],
-    ki: U→W→E,
-    output: Σ(a+b+c)
-}
-DECODER = {
-    input: Σ,
-    split: [U,W,E],
-    map: [a,b,c],
-    output: 3D-Geo
-}
-<h2>3D → 6D · Geo‑Architektur · iki1uc</h2>
+</pre>
+
+ 3D → 6D · Geo‑Architektur · iki1uc
 <pre>
 1D: Rotation        = 360.js
 2D: Matrix          = 3mal3.js
