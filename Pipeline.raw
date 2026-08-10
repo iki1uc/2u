@@ -1,1 +1,7 @@
 Pipeline(4 → 9) = 4 → 5 → 6 → 7 → 8 → 9
+PIPELINE = {
+    4→9:  W1 → W2 → W3 → E1 → E2 → E3,
+    0→2:  a → b → c,
+    VTALITY: TMP(main) + TMP(home) + TMP(ort),
+    EVENT: tmp(zu(tmp(erreignis)))
+}
