@@ -1,20 +1,69 @@
-(Organisator)
-Realinhalt:
+// iki1uc · PIPELINE ENGINE · real VTALITY · TMP(main/home/ort)
 
-zeigt alle Module
+import { MODULE } from "./OUR.js";
+import { TMP360 } from "./360.js";
 
-zeigt alle RAW‑Dateien
+// 1 · Pipeline 4 → 9 (W → E)
+export function pipeline49() {
+    return {
+        seq: [4,5,6,7,8,9],
+        axis: "W → E",
+        color: ["gelb","gelb","gelb","rot","rot","rot"],
+        meaning: ["W1","W2","W3","E1","E2","E3"]
+    };
+}
 
-zeigt alle HTML‑Dateien
+// 2 · Pipi-Bildung 0 → 1 → 2 (a/b/c)
+export function pipi012() {
+    return {
+        seq: [0,1,2],
+        bildung: {
+            0: "a = Fläche = Ursache",
+            1: "b = Körper = Wirkung",
+            2: "c = Continuum = Ergebnis"
+        },
+        color: ["grün","gelb","rot"]
+    };
+}
 
-ist die Übersicht
+// 3 · VTALITY-Lauf (TMP + Prefetch)
+export function vitalityRun(operator, ebene) {
+    const base = MODULE.full(operator, ebene);
 
-Interpretation (rein real):
+    return {
+        operator,
+        ebene,
+        tmp: base.zug,
+        addr: base.addr,
+        rot: {
+            r360: base.rot360,
+            r8x: base.rot8x,
+            r12x: base.rot12x
+        },
+        prefetch: base.prefetch,
+        bildung: base.bildung,
+        matrix: base.matrix,
+        icome: base.icome
+    };
+}
 
-index.html ist der Navigator
+// 4 · Schlüssel-Ereignis
+export function keyEvent(event) {
+    return {
+        event,
+        tmp: `tmp(zu(tmp(${event})))`,
+        status: "real VTALITY event"
+    };
+}
 
-keine Runtime
-
-keine Berechnung
-
-nur Darstellung
+// 5 · Load + Run
+export function loadGame() {
+    return {
+        pipeline: pipeline49(),
+        bildung: pipi012(),
+        start: vitalityRun("slide", "Ursache"),
+        home: vitalityRun("wette", "Wirkung"),
+        ort: vitalityRun("score", "Ergebnis"),
+        event: keyEvent("start")
+    };
+}
